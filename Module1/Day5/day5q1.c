@@ -1,33 +1,37 @@
-// Program to toggle case
-#include<stdio.h>
-#include<ctype.h>
+// Use structures to find the volume and the total surface area of the box. 
 
-void toggleCase(char* str)
-{
-    while(*str)
-    {
-        if(isupper(*str))
-            *str= tolower(*str);
+#include <stdio.h>
 
-        else if(islower(*str))
-            *str= toupper(*str);
-    
-        str++;
-    }
+struct Box {
+    float length;
+    float width;
+    float height;
+};
+
+float calculateVolume(struct Box *boxPtr) {
+    return boxPtr->length * boxPtr->width * boxPtr->height;
+}
+
+float calculateSurfaceArea(struct Box *boxPtr) {
+    return 2 * (boxPtr->length * boxPtr->width + boxPtr->length * boxPtr->height + boxPtr->width * boxPtr->height);
 }
 
 int main() {
-    char str[] = "Hello World";
-    toggleCase(str);
-    printf("%s\n", str);
+    struct Box myBox;
+    struct Box *boxPtr = &myBox;
 
-    char str2[] = "A+B";
-    toggleCase(str2);
-    printf("%s\n", str2);
+    // Assign values to the box dimensions
+    boxPtr->length = 5.0;
+    boxPtr->width = 3.0;
+    boxPtr->height = 2.0;
 
-    char str3[] = "Prog4u";
-    toggleCase(str3);
-    printf("%s\n", str3);
+    // Calculate and display the volume
+    float volume = calculateVolume(boxPtr);
+    printf("Volume: %.2f\n", volume);
+
+    // Calculate and display the total surface area
+    float surfaceArea = calculateSurfaceArea(boxPtr);
+    printf("Surface Area: %.2f\n", surfaceArea);
 
     return 0;
 }
